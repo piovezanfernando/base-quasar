@@ -1,0 +1,14 @@
+{
+  "extends": "@quasar/app-vite/tsconfig-preset",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["lodash"],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types/"
+    ],
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strict": false
+  }
+}
