@@ -31,6 +31,7 @@ export default function defaultService() {
 
   function create<T>(urlPath: string, obj: any, callback: (res: ApiResponse<T>) => void): void {
     $axios.post(urlPath, obj).then((response) => {
+      console.log(response);
       showSucess(response, 'positive', 'top-right');
       callback(response.data);
     });

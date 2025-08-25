@@ -72,9 +72,10 @@ import { computed, onMounted, ref, toRefs } from 'vue';
 import InformationExpanse from 'components/forms/informationExpanse.vue';
 import SubjectForm from 'components/forms/SubjectForm.vue';
 import AuthorForm from 'components/forms/AuthorForm.vue';
+import BookForm from 'components/forms/BookForm.vue';
 export default {
   name: 'defaultForm',
-  components: { InformationExpanse, SubjectForm, AuthorForm },
+  components: { InformationExpanse, SubjectForm, AuthorForm, BookForm },
   props: ['model', 'isEdit', 'routeApi', 'component'],
   setup(props) {
     let formData = toRefs(props.model);
@@ -105,6 +106,7 @@ export default {
           formData.value['id'],
           formData.value,
           (response) => {
+            console.log('fernando', JSON.stringify(response));
             if (response.success) {
               formStore.setIsDisable(true);
               formStore.setIsRefresh(true);

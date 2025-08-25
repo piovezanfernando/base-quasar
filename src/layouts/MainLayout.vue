@@ -87,14 +87,19 @@
           icon="menu_open"
           label="Cadastros"
         >
-          <q-item to="registers/Subject" class="q-ml-xl" active-class="q-item-no-link-highlighting">
+          <q-item :to="{ name: 'Subject' }" class="q-ml-xl" active-class="q-item-no-link-highlighting">
             <q-item-section>
-              <q-item-label>Assuntos</q-item-label>
+              <q-item-label>Assunto</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item to="registers/Author" class="q-ml-xl" active-class="q-item-no-link-highlighting">
+          <q-item :to="{ name: 'Author' }" class="q-ml-xl" active-class="q-item-no-link-highlighting">
             <q-item-section>
               <q-item-label>Autor</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item :to="{ name: 'Book' }" class="q-ml-xl" active-class="q-item-no-link-highlighting">
+            <q-item-section>
+              <q-item-label>Livro</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>
