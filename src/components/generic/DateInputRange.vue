@@ -18,9 +18,8 @@
 
 <script setup lang="ts">
 
-import { defineEmits, defineProps, ref } from 'vue';
+import { defineEmits, ref } from 'vue';
 
-const props = defineProps(['modelDate', 'isRange']);
 const emits = defineEmits(['update:modelDate']);
 
 const dateRange = ref({from: '', to: ''});

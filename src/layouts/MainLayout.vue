@@ -52,74 +52,74 @@
       </q-toolbar>
     </q-header>
 
-<!--    <q-drawer-->
-<!--      v-model="leftDrawerOpen"-->
-<!--      show-if-above-->
-<!--      bordered-->
-<!--    >-->
-<!--      <q-list>-->
-<!--        <q-expansion-item-->
-<!--          icon="pages"-->
-<!--          label="User"-->
-<!--        >-->
-<!--          <q-list class="q-pl-lg">-->
-<!--            <q-item to="/Profile" active-class="q-item-no-link-highlighting">-->
-<!--              <q-item-section avatar>-->
-<!--                <q-icon name="person"/>-->
-<!--              </q-item-section>-->
-<!--              <q-item-section>-->
-<!--                <q-item-label>User Profile</q-item-label>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--            <q-item to="/Maintenance" active-class="q-item-no-link-highlighting">-->
-<!--              <q-item-section avatar>-->
-<!--                <q-icon name="settings"/>-->
-<!--              </q-item-section>-->
-<!--              <q-item-section>-->
-<!--                <q-item-label>Maintenance</q-item-label>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--          </q-list>-->
-<!--        </q-expansion-item>-->
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+    >
+      <q-list>
+        <q-expansion-item
+          icon="pages"
+          label="User"
+        >
+          <q-list class="q-pl-lg">
+            <q-item to="/Profile" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="person"/>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>User Profile</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item to="/Maintenance" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="settings"/>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Maintenance</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
 
 
-<!--        <q-expansion-item-->
-<!--          icon="menu_open"-->
-<!--          label="Cadastros"-->
-<!--        >-->
-<!--          <q-item to="Classification" class="q-ml-xl" active-class="q-item-no-link-highlighting">-->
-<!--            <q-item-section>-->
-<!--              <q-item-label>Classification</q-item-label>-->
-<!--            </q-item-section>-->
-<!--          </q-item>-->
-<!--          <q-expansion-item-->
-<!--            :header-inset-level="0.85"-->
-<!--            label="Level 2"-->
-<!--          >-->
-<!--            <q-item class="q-ml-xl" style="margin-left: 55px  !important;" active-class="q-item-no-link-highlighting">-->
-<!--              <q-item-section>-->
-<!--                <q-item-label>Level 2.1</q-item-label>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--            <q-expansion-item-->
-<!--              :header-inset-level="1"-->
-<!--              label="Level 2.2"-->
-<!--            >-->
-<!--              <q-item style="margin-left: 65px  !important;" active-class="q-item-no-link-highlighting">-->
-<!--                <q-item-section>-->
-<!--                  <q-item-label>Level 2.2.1</q-item-label>-->
-<!--                </q-item-section>-->
-<!--              </q-item>-->
-<!--              <q-item style="margin-left: 65px  !important;" active-class="q-item-no-link-highlighting">-->
-<!--                <q-item-section>-->
-<!--                  <q-item-label>Level 2.2.2</q-item-label>-->
-<!--                </q-item-section>-->
-<!--              </q-item>-->
-<!--            </q-expansion-item>-->
-<!--          </q-expansion-item>-->
-<!--        </q-expansion-item>-->
-<!--      </q-list>-->
-<!--    </q-drawer>-->
+        <q-expansion-item
+          icon="menu_open"
+          label="Cadastros"
+        >
+          <q-item to="registers/Classification" class="q-ml-xl" active-class="q-item-no-link-highlighting">
+            <q-item-section>
+              <q-item-label>Classification</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-expansion-item
+            :header-inset-level="0.85"
+            label="Level 2"
+          >
+            <q-item class="q-ml-xl" style="margin-left: 55px  !important;" active-class="q-item-no-link-highlighting">
+              <q-item-section>
+                <q-item-label>Level 2.1</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-expansion-item
+              :header-inset-level="1"
+              label="Level 2.2"
+            >
+              <q-item style="margin-left: 65px  !important;" active-class="q-item-no-link-highlighting">
+                <q-item-section>
+                  <q-item-label>Level 2.2.1</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item style="margin-left: 65px  !important;" active-class="q-item-no-link-highlighting">
+                <q-item-section>
+                  <q-item-label>Level 2.2.2</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-expansion-item>
+          </q-expansion-item>
+        </q-expansion-item>
+      </q-list>
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -137,14 +137,14 @@ export default defineComponent({
   },
 
   setup () {
-    const leftDrawerOpen = ref(false)
+    const leftDrawerOpen = ref(false);
 
     return {
       leftDrawerOpen,
       toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
+        leftDrawerOpen.value = !leftDrawerOpen.value;
       }
-    }
+    };
   }
 });
 </script>
