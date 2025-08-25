@@ -27,7 +27,7 @@
       const fieldOptions = [
         {label: 'Ativo', value: 'is_active', type: 'boolean'},
         {label: 'Data de Criação', value: 'created_at', type: 'date'},
-        {label: 'Description', value: 'description', type: 'string'}
+        {label: 'Descrição', value: 'description', type: 'string'}
       ];
 
       return {

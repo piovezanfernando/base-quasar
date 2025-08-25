@@ -9,7 +9,7 @@
   />
   <q-input
     v-model="formData.description"
-    label="Description"
+    label="Descrição"
     outlined
     clearable
     :disable="formStore.isDisable"
