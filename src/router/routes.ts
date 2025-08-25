@@ -21,6 +21,7 @@ const routes: RouteRecordRaw[] = [
     meta: { public: true },
     children: [
       { path: 'subject', component: () => import('pages/registers/Subject.vue'), name: 'Subject' },
+      { path: 'author', component: () => import('pages/registers/Author.vue'), name: 'Author' },
     ]
   },
 

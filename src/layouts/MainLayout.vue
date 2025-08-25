@@ -92,6 +92,11 @@
               <q-item-label>Assuntos</q-item-label>
             </q-item-section>
           </q-item>
+          <q-item to="registers/Author" class="q-ml-xl" active-class="q-item-no-link-highlighting">
+            <q-item-section>
+              <q-item-label>Autor</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-expansion-item>
       </q-list>
     </q-drawer>

@@ -71,9 +71,10 @@ import { useFormStore } from 'stores/form';
 import { computed, onMounted, ref, toRefs } from 'vue';
 import InformationExpanse from 'components/forms/informationExpanse.vue';
 import SubjectForm from 'components/forms/SubjectForm.vue';
+import AuthorForm from 'components/forms/AuthorForm.vue';
 export default {
   name: 'defaultForm',
-  components: { InformationExpanse, SubjectForm },
+  components: { InformationExpanse, SubjectForm, AuthorForm },
   props: ['model', 'isEdit', 'routeApi', 'component'],
   setup(props) {
     let formData = toRefs(props.model);
