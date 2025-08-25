@@ -20,7 +20,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     meta: { public: true },
     children: [
-      { path: 'classification', component: () => import('pages/registers/Classification.vue'), name: 'Classification' },
+      { path: 'subject', component: () => import('pages/registers/Subject.vue'), name: 'Subject' },
     ]
   },
 

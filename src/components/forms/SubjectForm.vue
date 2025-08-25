@@ -8,8 +8,8 @@
     readonly
   />
   <q-input
-    v-model="formData.name"
-    label="Nome"
+    v-model="formData.description"
+    label="Description"
     outlined
     clearable
     :disable="formStore.isDisable"

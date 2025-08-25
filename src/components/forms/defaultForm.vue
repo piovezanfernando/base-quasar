@@ -70,10 +70,10 @@ import defaultService from 'src/api/default';
 import { useFormStore } from 'stores/form';
 import { computed, onMounted, ref, toRefs } from 'vue';
 import InformationExpanse from 'components/forms/informationExpanse.vue';
-import ClassificationForm from 'components/forms/ClassificationForm.vue';
+import SubjectForm from 'components/forms/SubjectForm.vue';
 export default {
   name: 'defaultForm',
-  components: { ClassificationForm, InformationExpanse },
+  components: { InformationExpanse, SubjectForm },
   props: ['model', 'isEdit', 'routeApi', 'component'],
   setup(props) {
     let formData = toRefs(props.model);

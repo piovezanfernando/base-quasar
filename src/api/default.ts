@@ -1,7 +1,6 @@
 import { $axios } from 'src/boot/axios';
 import { Notify } from 'quasar';
 import { ApiResponse, DefaultRequest } from 'src/models/default';
-import { ClassificationResponse } from 'src/models/classification';
 
 export default function defaultService() {
   function getAll<T>(urlPath: string, filter: string, params: DefaultRequest, callback: (res: ApiResponse<T>) => void): void {
