@@ -43,6 +43,17 @@
     :readonly="formStore.isDisable"
     :rules="[(val: string) => requiredField(val)]"
   />
+  <q-input
+    v-model="formData.price"
+    label="Valor do Livro"
+    outlined
+    clearable
+    mask="#.##"
+    reverse-fill-mask
+    :disable="formStore.isDisable"
+    :readonly="formStore.isDisable"
+    :rules="[(val: string) => requiredField(val)]"
+  />
   <!-- Multiselect de Autores -->
   <q-select
     v-model="authorsIds"

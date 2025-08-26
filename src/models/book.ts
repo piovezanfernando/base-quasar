@@ -4,6 +4,7 @@ export interface BookData {
   publisher: string;
   edition: number;
   year: string;
+  price: number;
   authors: BookAuthorRef[];
   subjects: BookSubjectRef[];
 }
