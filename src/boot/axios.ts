@@ -2,7 +2,7 @@
 import { boot } from 'quasar/wrappers';
 import { Notify } from 'quasar';
 import axios from 'axios';
-import { useAuthStore } from 'src/stores/auth.js';
+import { useAuthStore } from 'src/stores/auth';
 
 const URL_API = 'http://127.0.0.1/api';
 const $axios = axios.create({
@@ -10,7 +10,7 @@ const $axios = axios.create({
   withCredentials: true,
 });
 
-const showErrorNotification = ( message?: string, caption = 'Error') => {
+const showErrorNotification = (message?: string, caption = 'Error') => {
   console.log(message, caption);
   return Notify.create({
     message: message || 'Ooooops! An error occured',

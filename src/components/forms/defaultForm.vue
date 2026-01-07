@@ -1,92 +1,110 @@
 <template>
-  <div>
-    <q-card flat class="my-card">
-      <q-card-section>
-        <div class="row items-center no-wrap">
-          <div class="col">
-            <div class="text-h6">
-              Visualização de registro
-            </div>
-          </div>
+  <div class="q-form-container">
+    <!-- Header with Actions -->
+    <div class="row items-center justify-between q-mb-lg">
+      <div class="text-subtitle1 text-weight-bold text-slate-700">
+        {{ formData?.id ? 'Visualização de Registro' : 'Novo Registro' }}
+      </div>
 
-          <div class="col-auto">
-            <q-btn color="grey-7" flat icon="more_vert">
-              <q-menu anchor="bottom left" self="top left" auto-close>
-                <q-list>
-                  <q-item clickable @click="showConfirmMessage = true">
-                    <q-item-section v-if="showEditBtn">Excluir</q-item-section>
-                    <q-item-section v-if="!showEditBtn">Reativar</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-            <q-btn color="grey-7" flat icon="close" @click="closeSideBar" />
-          </div>
-        </div>
-      </q-card-section>
-      <q-form class="q-gutter-md" @submit.prevent="onSubmit()">
-        <q-expansion-item icon="topic" label="Detalhes" default-opened class="q-pa-md">
-          <q-card>
+      <div class="row items-center q-gutter-x-sm">
+        <q-btn v-if="formData?.id" color="slate-400" flat round icon="more_vert" size="sm">
+          <q-menu anchor="bottom right" self="top right" auto-close class="glass-card shadow-lg">
+            <q-list min-width="150px">
+              <q-item clickable @click="showConfirmMessage = true" class="text-rose-600">
+                <q-item-section avatar>
+                  <q-icon name="delete_outline" size="xs" />
+                </q-item-section>
+                <q-item-section>Excluir</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+      </div>
+    </div>
 
-            <q-card-section>
-              <component :is="component" :model="formData"></component>
-            </q-card-section>
-          </q-card>
-        </q-expansion-item>
-        <div>
-          <q-btn label="Editar" v-if="showEditBtn" flat text-color="white" class="q-ml-md bg-blue-7"
-                 @click="setEdit();" />
-          <div v-if='!formStore.isDisable'>
-            <q-btn label="Cancelar" @click="btnCancel()" flat text-color="grey-8" class="q-mr-sm q-ml-md bg-grey-3" />
-            <q-btn label="Salvar" type="submit" flat text-color="white" class="q-mr-sm q-my-lg bg-blue-7"
-                   validateBeforeSubmit: true />
-          </div>
-        </div>
-      </q-form>
+    <!-- Main Form Component -->
+    <q-form class="column q-gutter-y-md" @submit.prevent="onSubmit()">
+      <div class="form-content">
+        <component :is="dynamicComponent" :model="formData"></component>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="row items-center justify-end q-mt-xl q-gutter-x-md sticky-footer">
+        <q-btn v-if="showEditBtn" label="Editar" icon="edit" unelevated color="indigo-600" @click="setEdit()"
+          class="rounded-lg q-px-md" />
+
+        <template v-if="!formStore.isDisable">
+          <q-btn label="Cancelar" flat color="slate-500" @click="btnCancel()" class="rounded-lg" />
+          <q-btn label="Salvar Alterações" type="submit" unelevated color="primary" class="rounded-lg q-px-lg" />
+        </template>
+      </div>
+    </q-form>
+
+    <!-- Information Accordion (Optional Meta Data) -->
+    <div class="q-mt-xl opacity-80">
       <information-expanse :model="formData"></information-expanse>
-    </q-card>
+    </div>
+
+    <!-- Confirm Delete -->
     <q-dialog v-model="showConfirmMessage" persistent>
-      <q-card>
-        <q-card-section class="row items-center">
-          <q-avatar icon="report" color="orange" size="xl" text-color="white" />
-          <span class="q-ml-sm">Deseja realmente excluir este registro?</span>
+      <q-card flat class="glass-card q-pa-md border-slate-200 shadow-2xl overflow-hidden" style="width: 400px">
+        <q-card-section class="column items-center text-center q-py-lg">
+          <div class="bg-rose-50 q-pa-md rounded-full q-mb-md">
+            <q-icon name="warning" color="rose-600" size="md" />
+          </div>
+          <div class="text-h6 text-weight-bold text-slate-800">Confirmar Exclusão</div>
+          <div class="text-body2 text-slate-500 q-mt-sm">
+            Tem certeza que deseja excluir este registro? Esta ação não pode ser desfeita.
+          </div>
         </q-card-section>
-        <q-card-actions align="right">
-          <q-btn flat label="Cancelar" color="primary" v-close-popup />
-          <q-btn
-            flat
-            label="Sim"
-            color="red"
-            v-close-popup
-            @click="requestDelete"
-          />
+
+        <q-card-actions
+        align="center"
+        class="q-gutter-x-md q-pb-md"
+        >
+          <q-btn flat label="Cancelar" color="slate-600" class="rounded-lg" v-close-popup />
+          <q-btn unelevated label="Sim, Excluir" color="rose-600" class="rounded-lg q-px-md" @click="requestDelete"
+            v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
   </div>
 </template>
+
 <script lang="ts">
 import defaultService from 'src/api/default';
 import { useFormStore } from 'stores/form';
-import { computed, onMounted, ref, toRefs } from 'vue';
+import { computed, ref, defineComponent, defineAsyncComponent } from 'vue';
 import InformationExpanse from 'components/forms/informationExpanse.vue';
-import ClassificationForm from 'components/forms/ClassificationForm.vue';
-export default {
+
+export default defineComponent({
   name: 'defaultForm',
-  components: { ClassificationForm, InformationExpanse },
-  props: ['model', 'isEdit', 'routeApi', 'component'],
-  setup(props) {
-    let formData = toRefs(props.model);
-    onMounted(() => {
-      formData.value = props.model;
-    });
+  components: { InformationExpanse },
+  props: {
+    model: { type: Object, required: true },
+    isEdit: { type: Boolean, default: false },
+    routeApi: { type: String, required: true },
+    component: { type: String, required: true }
+  },
+  emits: ['saved', 'deleted', 'cancelled'],
+  setup(props, { emit }) {
     const formStore = useFormStore();
     const { update, create, remove } = defaultService();
+
+    // Maintain full reactivity with the parent model
+    const formData = computed(() => props.model);
+
+    // Dynamic component loading based on props.component
+    const dynamicComponent = computed(() => {
+      console.log(props.component);
+      return defineAsyncComponent(() => import(`./${props.component}.vue`)); // Adjust path if needed
+    });
+
     const showConfirmMessage = ref(false);
-    const showEditBtn = computed(() => formStore.isDisable && formData?.is_active);
+    const showEditBtn = computed(() => formStore.isDisable && formData.value?.is_active);
 
     const closeSideBar = () => {
-      formStore.setIsVisible(false);
+      emit('cancelled');
     };
 
     const setEdit = () => {
@@ -95,34 +113,33 @@ export default {
 
     const btnCancel = () => {
       formStore.setIsDisable(true);
+      emit('cancelled');
     };
 
     const handleApi = () => {
-      if (formData.value !== null && formData.value['id'] != undefined) {
+      if (formData.value && formData.value.id != undefined) {
         update(
           props.routeApi,
-          formData.value['id'],
+          formData.value.id,
           formData.value,
           (response) => {
             if (response.success) {
               formStore.setIsDisable(true);
-              formStore.setIsRefresh(true);
+              emit('saved', response.data);
             }
           }
         );
       } else {
-        console.log(formData);
         create(
           props.routeApi,
-          formData,
+          formData.value,
           (response) => {
             if (response.success) {
               formStore.setIsDisable(true);
-              formStore.setIsRefresh(true);
+              emit('saved', response.data);
             }
           });
       }
-      closeSideBar();
     };
 
     const onSubmit = () => {
@@ -130,14 +147,14 @@ export default {
     };
 
     const requestDelete = () => {
+      if (!formData.value?.id) return;
       remove(
         props.routeApi,
-        formData.value['id'],
+        formData.value.id,
         (response) => {
           if (response.success) {
-            formStore.setIsDisable(true);
-            formStore.setIsRefresh(true);
-            formStore.setIsVisible(false);
+            emit('deleted', response.data);
+            emit('saved', response.data);
           }
         });
     };
@@ -146,9 +163,7 @@ export default {
       showConfirmMessage,
       formStore,
       formData,
-      update,
-      create,
-      remove,
+      dynamicComponent,
       showEditBtn,
       closeSideBar,
       setEdit,
@@ -157,5 +172,24 @@ export default {
       requestDelete
     };
   }
-};
+});
 </script>
+
+<style lang="scss" scoped>
+.q-form-container {
+  padding: 8px;
+}
+
+.sticky-footer {
+  position: sticky;
+  bottom: 0;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  padding: 16px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-content {
+  min-height: 200px;
+}
+</style>

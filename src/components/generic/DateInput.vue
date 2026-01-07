@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md" style="max-width: 300px">
-    <q-input filled v-model="date" mask="date" :rules="['date']" >
+    <q-input filled v-model="date" mask="date" :rules="['date']">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 
-import { defineEmits, defineProps, ref, toRefs } from 'vue';
+import { ref, toRefs } from 'vue';
 
 const props = defineProps(['modelDate']);
 const emits = defineEmits(['update:modelDate']);

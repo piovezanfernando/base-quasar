@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const useFormStore = defineStore({
-  id: 'formStore', // identificador único para o store
-
+export const useFormStore = defineStore('formStore', {
   state: () => ({
     isDisable: true,
     isVisible: false,

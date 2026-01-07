@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers';
-import { useAuthStore } from 'src/stores/auth.js';
+import { useAuthStore } from 'src/stores/auth';
 
 export default boot(({ store, router }) => {
   const auth = useAuthStore(store);
@@ -10,7 +10,7 @@ export default boot(({ store, router }) => {
 
     // If not authenticated, redirect to Login
     if (!isAuthenticated && !isPublic && to.name !== 'Login') {
-      return { name: '/Login' };
+      return { name: 'Login' };
     }
   });
 });

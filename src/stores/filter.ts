@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia';
 
-export const useFilterStore = defineStore({
-  id: 'filter',
+export const useFilterStore = defineStore('filter', {
   state: () => ({
     isLoading: false,
-    filter: null
+    filter: null as string | null
   }),
   actions: {
     setFilterName(filter: string) {

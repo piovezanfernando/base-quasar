@@ -1,23 +1,28 @@
 
 export interface DefaultRequest {
-  page: number|null|undefined;
-  fields: string|null;
-  sortBy: string|null;
+  page: number | null | undefined;
+  fields: string | null;
+  sortBy: string | null;
   descending: boolean;
-  rowsPerPage: number|null;
+  rowsPerPage: number | null;
 }
 
 export interface ApiResponse<T> {
-  (response: T): void;
-  success: boolean|null;
+  success: boolean | null;
   data: {
-    current_page: number;
     data?: T[];
-    from: number;
-    last_page: number;
-    per_page: number;
-    to: number;
-    total: number;
+    meta?: {
+      current_page: number;
+      from: number;
+      last_page: number;
+      per_page: number;
+      to: number;
+      total: number;
+    };
+    current_page?: number;
+    last_page?: number;
+    per_page?: number;
+    total?: number;
   };
-  message: string|null;
+  message: string | null;
 }
