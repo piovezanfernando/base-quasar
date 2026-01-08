@@ -10,6 +10,12 @@
         <q-btn v-if="formData?.id" color="slate-400" flat round icon="more_vert" size="sm">
           <q-menu anchor="bottom right" self="top right" auto-close class="glass-card shadow-lg">
             <q-list min-width="150px">
+              <q-item v-if="formStore.isDisable" clickable @click="setEdit()">
+                <q-item-section avatar>
+                  <q-icon name="edit_note" size="xs" />
+                </q-item-section>
+                <q-item-section>Editar</q-item-section>
+              </q-item>
               <q-item clickable @click="showConfirmMessage = true" class="text-rose-600">
                 <q-item-section avatar>
                   <q-icon name="delete_outline" size="xs" />
@@ -30,9 +36,6 @@
 
       <!-- Action Footer -->
       <div class="row items-center justify-end q-mt-xl q-gutter-x-md sticky-footer">
-        <q-btn v-if="showEditBtn" label="Editar" icon="edit" unelevated color="indigo-600" @click="setEdit()"
-          class="rounded-lg q-px-md" />
-
         <template v-if="!formStore.isDisable">
           <q-btn label="Cancelar" flat color="slate-500" @click="btnCancel()" class="rounded-lg" />
           <q-btn label="Salvar Alterações" type="submit" unelevated color="primary" class="rounded-lg q-px-lg" />
@@ -101,7 +104,6 @@ export default defineComponent({
     });
 
     const showConfirmMessage = ref(false);
-    const showEditBtn = computed(() => formStore.isDisable && formData.value?.is_active);
 
     const closeSideBar = () => {
       emit('cancelled');
@@ -164,7 +166,6 @@ export default defineComponent({
       formStore,
       formData,
       dynamicComponent,
-      showEditBtn,
       closeSideBar,
       setEdit,
       btnCancel,
