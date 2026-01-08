@@ -13,6 +13,14 @@ Developed by **Fernando Piovezan**.
 
 ---
 
+## Clone frontend repository
+To use the frontend generator, we need the base project so that the generation occurs in the correct locations.
+
+```bash
+php artisan apiforge:setup-front
+```
+The Vue 3 + Quasar project will be cloned to the directory specified in the configuration.
+
 ## Frontend Generation
 
 To generate a frontend scaffold for a specific model in your Laravel project, run the following Artisan command:
